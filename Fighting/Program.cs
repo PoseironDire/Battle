@@ -11,9 +11,20 @@ namespace Fighting
 
             Console.WriteLine("What's your name fellow being?");
 
-            string playerName;
+            string playerName = "";
 
-            playerName = Console.ReadLine();
+            while (playerName == "")
+            {
+
+                playerName = Console.ReadLine();
+
+                if (playerName == "")
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Invalid Name, try again");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
 
             int playerHP = 100;
 
@@ -38,7 +49,7 @@ namespace Fighting
 
             while (!(foe1HP <= 0 || playerHP <= 0 && victory == true || defeat == true))
             {
-                Console.WriteLine(foe1 + " Is choosing a number 1-10...");
+                Console.WriteLine(foe1 + " Is choosing a number between 1-10...");
 
                 Random generator = new Random();
 
@@ -75,7 +86,9 @@ namespace Fighting
                     if (!(playerGuess1 > 0 && playerGuess1 < 11))
                     {
                         yourValue = false;
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("Invalid Value, try again");
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
                 }
 
@@ -165,7 +178,7 @@ namespace Fighting
 
                         playerGuess1 = 0;
 
-                        Console.WriteLine(playerName + " Is choosing a number between 1-10...");
+                        Console.WriteLine(playerName + " Is choosing a number between between 1-10...");
 
                         guess = Console.ReadLine();
 
@@ -182,7 +195,9 @@ namespace Fighting
                         if (!(playerGuess1 > 0 && playerGuess1 < 11))
                         {
                             yourValue = false;
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.WriteLine("Invalid Value, try again");
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
                     }
                     Console.WriteLine(playerName + " Chose a number!");
@@ -224,6 +239,7 @@ namespace Fighting
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine(playerName + " took " + damage1 + " damage!");
                         Console.ForegroundColor = ConsoleColor.White;
+                        if (playerHP < 0) playerHP = 0;
                     }
 
                     if (yourValue == false)
@@ -233,38 +249,40 @@ namespace Fighting
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine(foe1 + " took " + damage1 + " damage!");
                         Console.ForegroundColor = ConsoleColor.White;
+                        if (foe1HP < 0) foe1HP = 0;
                     }
 
                     Console.ReadLine();
 
-                }
-                if (foe1HP < 1)
-                {
-                    victory = true;
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Victory!");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.ReadLine();
-                }
-                if (playerHP < 1)
-                {
-                    defeat = true;
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Defeat!");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.ReadLine();
-                }
-                if (!(victory == true || defeat == true))
-                {
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("Status:");
-                    Console.WriteLine("Name: " + playerName);
-                    Console.WriteLine("HP: " + playerHP);
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Name: " + foe1);
-                    Console.WriteLine("HP: " + foe1HP);
-                    Console.ForegroundColor = ConsoleColor.White;
+                    if (foe1HP < 1)
+                    {
+                        victory = true;
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Victory!");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ReadLine();
+                    }
+                    if (playerHP < 1)
+                    {
+                        defeat = true;
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Defeat!");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ReadLine();
+                    }
+                    if (!(victory == true || defeat == true))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine("Status:");
+                        Console.WriteLine("Name: " + playerName);
+                        Console.WriteLine("HP: " + playerHP);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Name: " + foe1);
+                        Console.WriteLine("HP: " + foe1HP);
+                        Console.ForegroundColor = ConsoleColor.White;
 
+                        Console.ReadLine();
+                    }
                 }
             }
         }
